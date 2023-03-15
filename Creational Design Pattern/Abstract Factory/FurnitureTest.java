@@ -1,5 +1,3 @@
-import java.time.Duration;
-
 interface Chair
 {
     public abstract void designChair();    

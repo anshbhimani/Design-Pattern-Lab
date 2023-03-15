@@ -4,17 +4,17 @@ abstract class Bill
     private float bill_UnitRate;
     public static int billId = 1000;
 
-    public int getBillID() // getter of bill id
+    public int getBillID() 
     {
         return billId;
     }    
 
-    public int getBillUnit() // getter of bill uint
+    public int getBillUnit() 
     {
         return bill_Unit;
     }
 
-    public float getBillUnitRate() // getter of bill unit rate
+    public float getBillUnitRate() 
     {
         return bill_UnitRate;
     }

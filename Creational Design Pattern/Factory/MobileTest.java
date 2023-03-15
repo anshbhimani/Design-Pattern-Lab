@@ -1,5 +1,3 @@
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
-
 interface Mobile
 {
     public abstract void OperatingSystemName();
