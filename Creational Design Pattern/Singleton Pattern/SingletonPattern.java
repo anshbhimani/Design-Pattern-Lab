@@ -1,17 +1,37 @@
+import javax.xml.transform.Source;
+
 class Account
 {
-    int Account_number;
-    String Account_Holder_Name;
+    private int Account_Balance;
+    private int Account_Number;
+    private String Account_Holder_Name;
 
     public int get_Account_Number()
     {
-        return Account_number;
+        return Account_Number;
     }    
+
+    public int get_Account_Balance()
+    {
+        return Account_Balance;
+    }
 
     public String get_Account_Holder_Name()
     {
         return Account_Holder_Name;
     }  
+
+    Account(int balance, String name)
+    {
+        Account_Balance = balance;
+        Account_Holder_Name = name;
+    }
+
+    public void get_Details()
+    {
+        System.out.println("Account Holder Name : " + this.get_Account_Holder_Name());
+        System.out.println("Account Balance is  : " + this.get_Account_Balance());
+    }
 }
 
 class SingletonBanker
@@ -24,7 +44,7 @@ class SingletonBanker
         this.id = id;
     }
 
-    public static SingletonBanker getSingletonBanker(int id)
+    public static SingletonBanker getSingletonBankerInstance(int id)
     {
         if(sb == null)
         {
@@ -33,9 +53,14 @@ class SingletonBanker
         return sb;
     }
 
-    public void printValue(SingletonBanker SB)
+    public void getID()
     {
-        System.out.println("Banker ID : "+SB.sb.id);
+        System.out.println("Banker ID : "+id);
+    }
+
+    public Account openNewAccount(String name, int balance)
+    {
+        return new Account(balance, name);
     }
 }
 
@@ -43,7 +68,16 @@ public class SingletonPattern
 {
     public static void main(String[] args) 
     {
-        SingletonBanker banker1 = SingletonBanker.getSingletonBanker(101);
-        banker1.printValue(banker1);
+        SingletonBanker banker1 = SingletonBanker.getSingletonBankerInstance(101);
+        Account a1 = banker1.openNewAccount("Ansh Bhimani",10000000);
+
+        SingletonBanker banker2 = SingletonBanker.getSingletonBankerInstance(102);
+        Account a2 = banker2.openNewAccount("Amrut Bhimani",700000);
+
+        a1.get_Details();
+        a2.get_Details();
+
+        banker1.getID();
+        banker2.getID();
     }
 }
