@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
+// we use this pattern for creating large nos of objects of a class
 class TreeFlyWeight{
     String Type;
     String color;
@@ -13,8 +15,6 @@ class TreeFlyWeight{
 }
 
 class tree{
-    String Type;
-    String color;
     int x;
     int y;
     TreeFlyWeight tf;
@@ -32,7 +32,7 @@ class tree{
 
 class TreeFactory{
     Map<String, TreeFlyWeight> tm = new HashMap<String, TreeFlyWeight>();
-    TreeFlyWeight tfw = null;
+    TreeFlyWeight tfw = null; 
 
     public TreeFlyWeight createTree(String Type, String color){
         if(tm.containsKey(Type)){
@@ -53,7 +53,19 @@ class TreeFactory{
 }
 
 public class TreeExample {
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
+        TreeFactory fact1 = new TreeFactory();
+        Scanner sc = new Scanner("System.in");
+
+        System.out.println("Enter the number of Tree to be created : ");
+        int number_of_trees = sc.nextInt();
+        
+        System.out.println("Enter Name of the Tree you want to create  : ");
+        String name_of_tree = sc.next();
+
+        System.out.println("Enter Color of the Tree you want to create  : ");
+        String color_of_tree = sc.next();
         
     }
 }
