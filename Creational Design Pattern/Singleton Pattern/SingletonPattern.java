@@ -1,5 +1,3 @@
-import javax.xml.transform.Source;
-
 class Account
 {
     private int Account_Balance;
@@ -68,10 +66,10 @@ public class SingletonPattern
 {
     public static void main(String[] args) 
     {
-        SingletonBanker banker1 = SingletonBanker.getSingletonBankerInstance(101);
+        SingletonBanker banker1 = SingletonBanker.getSingletonBankerInstance(102);
         Account a1 = banker1.openNewAccount("Ansh Bhimani",10000000);
 
-        SingletonBanker banker2 = SingletonBanker.getSingletonBankerInstance(102);
+        SingletonBanker banker2 = SingletonBanker.getSingletonBankerInstance(101);
         Account a2 = banker2.openNewAccount("Amrut Bhimani",700000);
 
         a1.get_Details();
