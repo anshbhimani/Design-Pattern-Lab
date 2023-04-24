@@ -1,6 +1,6 @@
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.HashMap;
 
 class TreeFlyWeight
 {
@@ -45,8 +45,8 @@ class TreeFactory
             tfw = new TreeFlyWeight("Oak_tree", "brown");
             count_oak++;
         }
-        else if (Type.equalsIgnoreCase("neem_tree")) {
-            tfw = new TreeFlyWeight("neem_tree", "green");
+        else if (Type.equalsIgnoreCase("Neem_tree")) {
+            tfw = new TreeFlyWeight("Neem_tree", "green");
             count_neem++;
         }
         else{
@@ -55,16 +55,34 @@ class TreeFactory
         }
         return tfw;
     }
+
+    public void maximumDensityTree()
+    {
+        if(TreeFactory.count_neem>TreeFactory.count_oak)
+        {
+            System.out.println("Neem Tree has maximum density with density : " + TreeFactory.count_neem);
+        }
+
+        if(TreeFactory.count_neem<TreeFactory.count_oak)
+        {
+            System.out.println("Oak Tree has maximum density with density : " + TreeFactory.count_oak);
+        }
+
+        if(TreeFactory.count_neem==TreeFactory.count_oak)
+        {
+            System.out.println("Both Neem Tree and Oak Tree have same densities : " + TreeFactory.count_neem);
+        }
+    }
 }
 
 public class TreeExample 
 {
     public static void main(String[] args) {
         boolean more = true;
-        Scanner sc = new Scanner(System.in);
 
-        while(more) {
-
+        while(more) 
+        {
+            Scanner sc = new Scanner(System.in);
             TreeFactory treeFactory = new TreeFactory();
 
             System.out.println("enter the number of tree objects to be created: ");
@@ -88,8 +106,7 @@ public class TreeExample
 
             System.out.println("Do you want to create more tree ? ");
             more = sc.nextBoolean();
+            treeFactory.maximumDensityTree();
         }
-
-        System.out.println("maximum density of tree: " + Math.max(TreeFactory.count_neem,TreeFactory.count_oak) );
     }
 }

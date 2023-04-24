@@ -18,207 +18,120 @@
 import java.util.List;
 import java.util.ArrayList;
 
-interface MathProcessing
-{
-    public void performMathOperation(String operator, List<Integer> datainput);
+interface MathProcessing {
+    void performMathOperation(String operator, List<Integer> data);
 }
 
-class Basicmathprocessing implements MathProcessing
-{
-    MathAdapter ma1 = new MathAdapter();
+class BasicMathProcessing implements MathProcessing {
+    MathAdapter mathAdapter = new MathAdapter();
 
-    public void performMathOperation(String operator, List<Integer> datainput)
-    {
-
+    @Override
+    public void performMathOperation(String operator, List<Integer> data) {
+        mathAdapter.performMathOperation(operator, data);
     }
 }
 
-class AdvancedmathProcessing
-{
-    public void calculateAverage(List<Integer> ls)
-    {
+class AdvancedMathProcessing {
+    void calculateAverage(List<Integer> ls) {
         int sum = 0;
-        for(int num:ls)
-        {
-            sum = sum + ls.get(num);
+        for (int num : ls) {
+            sum = sum + num;
         }
-
         int average = sum / ls.size();
-
-        System.out.println("The Average is : " + average);
+        System.out.println("The average is: " + average);
     }
 
-    public void sortData(List<Integer> ls)
-    {
+    void sortData(List<Integer> ls) {
         int temp;
-
-        for(int i=0;i<ls.size();i++)
-        {
-            for(int j=1;j<ls.size();i++)
-            {
-                if(ls.get(j-1)>ls.get(i))
-                {
-                    temp = ls.get(j-1);
-                    ls.set(j-1, ls.get(j));
-                    ls.set(j,temp);
+        for (int i = 0; i < ls.size(); i++) {
+            for (int j = 1; j < ls.size(); j++) {
+                if (ls.get(j - 1) > ls.get(j)) {
+                    temp = ls.get(j - 1);
+                    ls.set(j - 1, ls.get(j));
+                    ls.set(j, temp);
                 }
             }
         }
-
-        System.out.println("Sorted array is : ");
-        for(Integer i : ls)
-        {
-            System.out.println(i + " ");
-        }
-
-        System.out.println("\n");
+        System.out.println("Sorted array is: " + ls);
     }
 
-    public void searchData(List<Integer> ls, int key)
-    {
-        int flag = 0;
-
-        for(int i=0; i<ls.size();i++)
-        {
-            if(key == ls.get(i))
-            {
+    int searchData(List<Integer> ls, int key) {
+        for (int i = 0; i < ls.size(); i++) {
+            if (key == ls.get(i)) {
                 System.out.println("Element " + key + " found at position " + i);
-            }
-
-            else
-            {
-                System.out.println(key + " not found in the array");
+                return i;
             }
         }
+        System.out.println(key + " not found in the array");
+        return -1;
     }
 
-    public void replaceData(List<Integer> ls, int key, int value) 
-    {
-        for(int i=0; i<ls.size();i++)
-        {
-            if(key == ls.get(i))
-            {
+    void replaceData(List<Integer> ls, int key, int value) {
+        for (int i = 0; i < ls.size(); i++) {
+            if (key == ls.get(i)) {
                 ls.set(i, value);
-            }
-
-            else
-            {
-                System.out.println("Element to be replaced not found !!");
+                System.out.println("Element " + key + " replaced with " + value);
+                return;
             }
         }
+        System.out.println("Element to be replaced not found !!");
     }
 
-    public void listAdd(List <Integer> ls)
-    {
-        int sum=0;
-        
-        for(Integer l : ls)
-        {
+    void listAdd(List<Integer> ls) {
+        int sum = 0;
+        for (int l : ls) {
             sum = sum + l;
         }
-
         System.out.println("Sum of the array is : " + sum);
     }
 }
 
-class MathAdapter implements MathProcessing
-{
-    AdvancedmathProcessing m1 = new AdvancedmathProcessing();
+class MathAdapter implements MathProcessing {
+    AdvancedMathProcessing advancedMathProcessing = new AdvancedMathProcessing();
 
     @Override
-    public void performMathOperation(String operator, List<Integer> data)
-    {
-        List <Integer> ls1 = new ArrayList<Integer>();
+    public void performMathOperation(String operator, List<Integer> data) {
+        if (operator.equalsIgnoreCase("average")) {
+            advancedMathProcessing.calculateAverage(data);
+        } else if (operator.equalsIgnoreCase("sort")) {
+            advancedMathProcessing.sortData(data);
+        } else if (operator.equalsIgnoreCase("search")) {
+            int key = data.get(0);
+            advancedMathProcessing.searchData(data.subList(1, data.size()), key);
+        } else if (operator.equalsIgnoreCase("replace")) {
+            int key = data.get(0);
+            int value = data.get(1);
+            advancedMathProcessing.replaceData(data.subList(2, data.size()), key, value);
+        } else if (operator.equalsIgnoreCase("add")) {
+            advancedMathProcessing.listAdd(data);
+        } else {
+            System.out.println("Invalid operator!!");
+        }
+    }
+}
+
+public class MathAdapterTest {
+    public static void main(String[] args) {
+        MathProcessing mathProcessor = new BasicMathProcessing();
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
         
-        if(operator.equalsIgnoreCase("sum")|| operator.equals("+"))
-        {
-           
-        }
-    }
-}
-
-public class MathAdapterTest
-{
-    public static void main(String[] args) 
-    {
+        System.out.println("Calculating average...");
+        mathProcessor.performMathOperation("average", numbers);
         
+        System.out.println("Performing addition...");
+        mathProcessor.performMathOperation("add", numbers);
+
+        System.out.println("Performing sorting...");
+        mathProcessor.performMathOperation("sort", numbers);
+
+        System.out.println("Performing replacement...");
+        mathProcessor.performMathOperation("replace", numbers);
+
+        System.out.println("Performing search...");
+        mathProcessor.performMathOperation("search", numbers);
     }
 }
 
-/*
- import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-interface MathProcessing{
-    public void performMathOperation(String type,Integer[] data);
-}
-
-
-class AdvanceMathProcessing{
-    public void calculateAverage(List<Integer> ls){
-        int sum=0;
-        for(int num:ls){
-            sum=sum+
-        }
-    }
-    public void sortData(List<Integer>ls){
-
-    }
-
-    public void searchData(List<Integer>ls,int key){
-
-    }
-
-    public void replaceData(List<Integer>ls,int key,int value){
-
-    }
-}
-
-class MathAdapter implements MathProcessing{
-
-    AdvanceMathProcessing am =new AdvanceMathProcessing();
-    @Override
-    public void performMathOperation(String type, Integer[] data) {
-        List<Integer>ls1=new ArrayList<Integer>();
-        for(int i=0;i<data.length;i++){
-            ls1.add(data[i]);
-        }
-
-        if(type.equalsIgnoreCase("sort")){
-            am.sortData(ls1);
-        }
-
-        else if(type.equalsIgnoreCase("search")){
-            Scanner sc =new Scanner(System.in);
-            System.out.println("Enter number to find:");
-            int find=sc.nextInt();
-            am.searchData(ls1,find);
-        }
-
-        else if(type.equalsIgnoreCase("avg")){
-            am.calculateAverage(ls1);
-        }
-
-        else if(type.equalsIgnoreCase("replace")){
-            Scanner sc1 =new Scanner(System.in);
-            System.out.println("Enter a number you want to replace:");
-            int find=sc1.nextInt();
-            System.out.println("Enter a value:");
-            int val=sc1.nextInt();
-            am.replaceData(ls1,find,val);
-        }
-    }
-}
-
-class BasicMathProcessing implements MathProcessing{
-
-    MathAdapter ma=new MathAdapter();
-    @Override
-    public void performMathOperation(String type, Integer[] data) {
-        ma.performMathOperation(type,data);
-    }
-}
-
-*/

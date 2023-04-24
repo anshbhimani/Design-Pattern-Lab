@@ -24,6 +24,7 @@ class Momento_Object
         return volume;
     }  
 }
+
 class OriginatorObject
 {
     private int temperature;

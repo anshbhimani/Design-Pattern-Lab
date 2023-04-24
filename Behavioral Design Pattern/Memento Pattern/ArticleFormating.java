@@ -29,6 +29,7 @@ class Momento_Object
 
 class OriginatorObject
 {
+    // real object whose state needed to be preserved
    private int fontSize;
    private String content;
    private String fontType;

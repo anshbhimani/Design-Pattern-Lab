@@ -1,0 +1,31 @@
+Decorator Pattern is a wrapper Pattern use to Decorate the class 
+It enhances existing object by placing these objects inside a special wrapper 
+
+Buffered String is a type of Decorator
+
+Helpful in providing runtime modification abilities hence more flexible
+eg : BufferedReader, FileReader
+
+                    Client
+                      |
+                      |
+                     Use
+                      |
+                      |
+                  Interface
+                    + method()
+                 ^            ^    
+                /              \
+           implements       implements
+              /                  \
+       Concrete Components        Base Decorator     
+        + method()                     wrapper component
+                                        + Decorator(c)
+                                   ^            ^
+                                  /              \
+                                 extends        extends
+                                /                  \
+                    ConcreteDecoratorA          ConcreteDecoratorB
+                        +method()                 +method()
+                        {super.extraWork()}        {super.extraWork()}   
+                        +extraWork()                +extraWork()
