@@ -11,8 +11,8 @@ class RedState implements TrafficLightState {
 
     @Override
     public void changeState(TrafficLight trafficLight) {
-        System.out.println("Changing state from RED to GREEN");
-        trafficLight.setState(new GreenState());
+        System.out.println("Changing state from RED to YELLOW");
+        trafficLight.setState(new YellowState());
         System.out.println();
     }
 }
@@ -25,8 +25,8 @@ class GreenState implements TrafficLightState {
 
     @Override
     public void changeState(TrafficLight trafficLight) {
-        System.out.println("Changing state from GREEN to YELLOW");
-        trafficLight.setState(new YellowState());
+        System.out.println("Changing state from GREEN to RED");
+        trafficLight.setState(new RedState());
         System.out.println();
     }
 }
@@ -39,8 +39,8 @@ class YellowState implements TrafficLightState {
 
     @Override
     public void changeState(TrafficLight trafficLight) {
-        System.out.println("Changing state from YELLOW to RED");
-        trafficLight.setState(new RedState());
+        System.out.println("Changing state from YELLOW to GREEN");
+        trafficLight.setState(new GreenState());
         System.out.println();
     }
 }

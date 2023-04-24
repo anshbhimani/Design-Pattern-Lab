@@ -1,14 +1,45 @@
 interface State
 {
     public void stateHandling();
+    public void changeState(StateChange state);
+}
+
+class StateChange 
+{
+    private State currentState;
+
+    public StateChange()
+    {
+        currentState = new State1(); 
+    }
+
+    public void setState(State new_state)
+    {
+        currentState = new_state;
+    }
+
+    public void display() {
+        currentState.stateHandling();
+    }
+
+    public void changeState() {
+        currentState.changeState(this);
+    }
 }
 
 class State1 implements State
 {
     @Override
     public void stateHandling() {
-        System.out.println("Welcome State to State 1\n");
+        System.out.println("Welcome to State 1\n");
         System.out.println("Initial State1 - can move to State2");
+    }
+
+    @Override
+    public void changeState(StateChange newState)
+    {
+        System.out.println("Changing from State1 to State2");
+        newState.setState(new State2());
     }
 }
 
@@ -19,6 +50,13 @@ class State2 implements State
         System.out.println("Welcome State to State 2\n");
         System.out.println("Initial State2 - can move to State3");
     }
+
+    @Override
+    public void changeState(StateChange newState)
+    {
+        System.out.println("Changing from State2 to State3");
+        newState.setState(new State3());
+    }
 }
 
 class State3 implements State
@@ -28,30 +66,37 @@ class State3 implements State
         System.out.println("Welcome State to State 3\n");
         System.out.println("Initial State3 - last state -can move to Initial State State1");
     }
+
+    @Override
+    public void changeState(StateChange newState)
+    {
+        System.out.println("Changing from State3 to State1");
+        newState.setState(new State1());
+    }
 }
 
 class Context
 {
-    State s;
+    private State current_State;
 
     public Context(State s)
     {
-        this.s = s;
+        current_State = s;
     }
 
     public void setState(State s)
     {
-        this.s = s;
+        current_State = s;
     }
 
     public State getState()
     {
-        return s;
+        return current_State;
     }
 
     public void performAction()
     {
-        s.stateHandling();
+        current_State.stateHandling();
     }
 }
 
@@ -59,16 +104,14 @@ public class StatePatternDemo
 {
     public static void main(String[] args) 
     {
-        State1 s1 = new State1();
-        State2 s2 = new State2();
-        State3 s3 = new State3();
+       StateChange state_change = new StateChange();
 
-        Context c1 = new Context(s1);
-        Context c2 = new Context(s2);
-        Context c3 = new Context(s3);
+       state_change.display();
 
-        c1.performAction();
-        c2.performAction();
-        c3.performAction();
+       state_change.changeState();
+       state_change.display();
+
+       state_change.changeState();
+       state_change.display();
     }
 }
